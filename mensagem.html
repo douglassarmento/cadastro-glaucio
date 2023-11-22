@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens Recebidas</title>
+    <style>
+           body {
+            text-align: center;
+        }
+        h1 a {
+            text-decoration: none; 
+            color: black; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        td:nth-child(2),
+        td:nth-child(3) {
+            padding: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="api.js"></script>
+    <script>
+     
+        function limparMensagens() {
+            localStorage.removeItem('userMessages');
+          
+            const userMessagesTable = document.getElementById('userMessages');
+            userMessagesTable.innerHTML = '';
+            alert('O registro de mensagens foi limpo.');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMessagesTable = document.getElementById('userMessages');
+
+            const storedData = obterMensagens();
+
+            if (storedData.length > 0) {
+              
+                storedData.forEach(function(userData) {
+                    const messageHTML = `
+                        <tr>
+                            <td>${userData.nome}</td>
+                            <td>${userData.email}</td>
+                            <td>${userData.mensagem}</td>
+                        </tr>
+                    `;
+                    userMessagesTable.innerHTML += messageHTML;
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1><a href="paginainicial.html">Home</a> | <a href="contato.html">Contato</a> | <a href="administrativo.html">Área Administrativa</a></h1>
+    <h2>Mensagens Recebidas</h2>
+
+    <button onclick="limparMensagens()">Limpar Mensagens</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Mensagem</th>
+            </tr>
+        </thead>
+        <tbody id="userMessages">
+        </tbody>
+    </table>
+</body>
+</html>

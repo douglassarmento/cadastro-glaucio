@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Administrativa</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        h1 a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (email === 'admin@admin.com' && password === '1234') {
+                    const loginData = {
+                        email: email,
+                        password: password
+                    };
+                    
+                    inserirMensagem(loginData);
+                    
+                    window.location.href = 'mensagem.html';
+                    alert('Login realizado com sucesso!')
+                } else {
+                    alert('Usuário ou senha incorretos!');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1><a href="paginainicial.html">Home</a> | <a href="contato.html">Contato</a> | <a href="administrativo.html">Área Administrativa</a></h1>
+    <h2>Área Administrativa</h2>
+    <form>
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" required>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>
